@@ -1,6 +1,8 @@
 import darkSaasLandingPage from "@/assets/images/dark-saas-landing-page.png";
 import lightSaasLandingPage from "@/assets/images/light-saas-landing-page.png";
 import aiStartupLandingPage from "@/assets/images/ai-startup-landing-page.png";
+import yoom from "@/assets/images/yoom.png";
+import cryptoverse from "@/assets/images/cryptoverse.png";
 import ArrowUpRightIcon from "@/assets/icons/arrow-up-right.svg";
 import CheckCircleIcon from "@/assets/icons/check-circle.svg";
 import grainImage from "@/assets/images/grain.jpg";
@@ -10,28 +12,34 @@ import { Card } from "@/components/Card";
 
 const portfolioProjects = [
   {
-    company: "Acme Corp",
-    year: "2022",
-    title: "Dark Saas Landing Page",
+    title: "Yoom - Video Conferencing",
     results: [
-      { title: "Enhanced user experience by 40%" },
-      { title: "Improved site speed by 50%" },
-      { title: "Increased mobile traffic by 35%" },
+      {
+        title: "Built a Zoom clone with Next.js, Tailwind CSS, and shadcn/ui.",
+      },
+      {
+        title:
+          "Implemented video calls, screen sharing, audio controls, and recording.",
+      },
+      {
+        title: "Added features like screen sharing, user pinning, and more.",
+      },
     ],
-    link: "https://youtu.be/4k7IdSLxh6w",
-    image: darkSaasLandingPage,
+    link: "https://yoom-drab.vercel.app",
+    image: yoom,
   },
   {
-    company: "Innovative Co",
-    year: "2021",
-    title: "Light Saas Landing Page",
+    title: "CRYPTOVERSE",
     results: [
-      { title: "Boosted sales by 20%" },
-      { title: "Expanded customer reach by 35%" },
-      { title: "Increased brand awareness by 15%" },
+      {
+        title:
+          "Developed using React.js and Ant Design. Integrated real-time cryptocurrency data via APIs.",
+      },
+      { title: "Created dynamic cryptocurrency statistic displays." },
+      { title: "Included a crypto news section forthe latest updates." },
     ],
-    link: "https://youtu.be/7hi5zwO75yc",
-    image: lightSaasLandingPage,
+    link: "https://crytosverse.netlify.app/",
+    image: cryptoverse,
   },
   {
     company: "Quantum Dynamics",
@@ -49,7 +57,7 @@ const portfolioProjects = [
 
 export const ProjectsSection = () => {
   return (
-    <section className="pb-16 lg:py-24">
+    <section id="projects" className="pb-16 lg:py-24">
       <div className="container">
         <SectionHeader
           eyebrow="Real-world Results"
@@ -58,18 +66,21 @@ export const ProjectsSection = () => {
         />
 
         <div className="mt-10 md:mt-20 flex flex-col gap-20">
-          {portfolioProjects.map((project) => (
+          {portfolioProjects.map((project, index) => (
             <Card
               key={project.title}
-              className="px-8 pt-8 pb-0 md:pt-12 md:px-10 lg:pt-16 lg:px-20 after:pointer-events-none"
+              className="px-8 pt-8 pb-0 md:pt-12 md:px-10 lg:pt-16 lg:px-20 sticky"
+              style={{
+                top: `calc(64px + ${index * 40}px`,
+              }}
             >
               <div className="lg:grid lg:grid-cols-2 lg:gap-16">
                 <div className="lg:pb-16">
-                  <div className="bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest text-sm gap-2 text-transparent bg-clip-text">
+                  {/* <div className="bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest text-sm gap-2 text-transparent bg-clip-text">
                     <span>{project.company}</span>
                     <span>&bull;</span>
                     <span>{project.year}</span>
-                  </div>
+                  </div> */}
 
                   <h3 className="font-serif text-2xl md:text-4xl mt-2 md:mt-5">
                     {project.title}
@@ -78,7 +89,7 @@ export const ProjectsSection = () => {
                   <ul className="flex flex-col gap-4 mt-4 md:mt-5">
                     {project.results.map((result) => (
                       <li className="flex gap-2 text-sm md:text-base text-white/50">
-                        <CheckCircleIcon className="size-5 md:size-6" />
+                        <CheckCircleIcon className="size-5 md:size-6 flex-shrink-0" />
                         <span>{result.title}</span>
                       </li>
                     ))}
