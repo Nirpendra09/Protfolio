@@ -54,7 +54,7 @@ export const HeroButtons: FC<HeroButtonsProps> = ({ className = "" }) => {
         <span role="img" aria-label="wave">
           👋
         </span>
-        <span className="font-semibold">Let's Connect</span>
+        <span className="font-semibold">Let&apos;s Connect</span>
       </button>
     </div>
   );

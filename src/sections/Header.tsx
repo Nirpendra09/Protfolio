@@ -34,19 +34,19 @@ export const Header = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const rect = entry.target.getBoundingClientRect();
+          const element = entry.target as HTMLElement;
+          const rect = element.getBoundingClientRect();
           const viewportHeight = window.innerHeight;
           const visibleHeight =
             Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
           const visiblePercentage =
-            (visibleHeight / entry.target.offsetHeight) * 100;
+            (visibleHeight / element.offsetHeight) * 100;
 
-          const isSmallSection =
-            entry.target.offsetHeight < viewportHeight * 0.5;
+          const isSmallSection = element.offsetHeight < viewportHeight * 0.5;
           const threshold = isSmallSection ? 30 : 50;
 
           if (entry.isIntersecting && visiblePercentage >= threshold) {
-            const newHash = `#${entry.target.id}` as NavItem["href"];
+            const newHash = `#${element.id}` as NavItem["href"];
 
             if (currentSection !== newHash) {
               currentSection = newHash;

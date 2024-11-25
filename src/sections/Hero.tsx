@@ -129,7 +129,7 @@ export const HeroSection = () => {
           </h1>
           <p className="mt-4 text-center text-white/60 md:text-lg">
             I specialize in tranforming designs into functional, high-performing
-            web applications. Let's discuss your next project.
+            web applications. Let&apos;s discuss your next project.
           </p>
         </div>
         <HeroButtons />
