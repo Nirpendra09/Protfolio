@@ -45,7 +45,7 @@ export const ExperienceSection = () => {
     },
     {
       id: 3,
-      role: "Software Engineering Intern",
+      role: "Software Engineer Intern",
       company: "PlaySimple Games",
       duration: "Dec 2022 - Jun 2023",
       location: "Bangalore, Karnataka",
@@ -80,7 +80,7 @@ export const ExperienceSection = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
                 <Card
-                  className="group relative overflow-hidden transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+                  className="group overflow-hidden transition-all duration-500 hover:scale-[1.02] cursor-pointer relative"
                   onClick={() =>
                     setSelectedId(selectedId === exp.id ? null : exp.id)
                   }

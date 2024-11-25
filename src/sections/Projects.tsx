@@ -1,14 +1,11 @@
-import darkSaasLandingPage from "@/assets/images/dark-saas-landing-page.png";
-import lightSaasLandingPage from "@/assets/images/light-saas-landing-page.png";
-import aiStartupLandingPage from "@/assets/images/ai-startup-landing-page.png";
-import yoom from "@/assets/images/yoom.png";
-import cryptoverse from "@/assets/images/cryptoverse.png";
 import ArrowUpRightIcon from "@/assets/icons/arrow-up-right.svg";
 import CheckCircleIcon from "@/assets/icons/check-circle.svg";
-import grainImage from "@/assets/images/grain.jpg";
-import Image from "next/image";
-import { SectionHeader } from "@/components/SectionHeader";
+import githubProfile from "@/assets/images/githubProfile.png";
+import cryptoverse from "@/assets/images/cryptoverse.png";
+import yoom from "@/assets/images/yoom.png";
 import { Card } from "@/components/Card";
+import { SectionHeader } from "@/components/SectionHeader";
+import Image from "next/image";
 
 const portfolioProjects = [
   {
@@ -29,7 +26,7 @@ const portfolioProjects = [
     image: yoom,
   },
   {
-    title: "CRYPTOVERSE",
+    title: "Cryptoverse",
     results: [
       {
         title:
@@ -42,16 +39,16 @@ const portfolioProjects = [
     image: cryptoverse,
   },
   {
-    company: "Quantum Dynamics",
-    year: "2023",
-    title: "AI Startup Landing Page",
+    title: "GitHub Profile Fetcher",
     results: [
-      { title: "Enhanced user experience by 40%" },
-      { title: "Improved site speed by 50%" },
-      { title: "Increased mobile traffic by 35%" },
+      { title: "Developed using HTML, CSS, and JavaScript." },
+      {
+        title:
+          "Designed to enable users to search for GitHub usernames and retrieve high-level information about the corresponding GitHub profiles.",
+      },
     ],
-    link: "https://youtu.be/Z7I5uSRHMHg",
-    image: aiStartupLandingPage,
+    link: "https://nirpendra09.github.io/GitProfileFetch.github.io",
+    image: githubProfile,
   },
 ];
 
@@ -94,7 +91,7 @@ export const ProjectsSection = () => {
                       </li>
                     ))}
                   </ul>
-                  <a href={project.link}>
+                  <a href={project.link} target="_blank">
                     <button className="bg-white text-gray-950 h-12 w-full md:w-auto px-6 rounded-xl font-semibold inline-flex items-center justify-center gap-2 mt-8">
                       <span>Visit Live Site</span>
                       <ArrowUpRightIcon className="size-4" />
