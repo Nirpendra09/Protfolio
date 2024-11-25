@@ -8,7 +8,10 @@ import CssIcon from "@/assets/icons/css3.svg";
 import GithubIcon from "@/assets/icons/github.svg";
 import HTMLIcon from "@/assets/icons/html5.svg";
 import ReactIcon from "@/assets/icons/react.svg";
+import NextIcon from "@/assets/icons/nextjs-icon.svg";
 import JavascriptIcon from "@/assets/icons/square-js.svg";
+import TypescriptIcon from "@/assets/icons/typescript.svg";
+import TailwindIcon from "@/assets/icons/tailwind.svg";
 import bookImage from "@/assets/images/book-cover.png";
 import mapImage from "@/assets/images/my-map.png";
 import smileMemoji from "@/assets/images/memoji-smile.png";
@@ -26,6 +29,10 @@ const toolboxItems = [
     iconType: JavascriptIcon,
   },
   {
+    title: "Typescript",
+    iconType: TypescriptIcon,
+  },
+  {
     title: "HTML5",
     iconType: HTMLIcon,
   },
@@ -34,7 +41,19 @@ const toolboxItems = [
     iconType: CssIcon,
   },
   {
+    title: "Tailwind",
+    iconType: TailwindIcon,
+  },
+  {
     title: "React",
+    iconType: ReactIcon,
+  },
+  {
+    title: "Next.js",
+    iconType: NextIcon,
+  },
+  {
+    title: "React Native",
     iconType: ReactIcon,
   },
   {

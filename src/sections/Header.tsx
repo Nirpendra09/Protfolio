@@ -1,6 +1,6 @@
 "use client";
 import { useHash } from "@/hooks/useHash";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { twMerge } from "tailwind-merge";
 import { Menu, X } from "lucide-react";
 
@@ -28,37 +28,50 @@ export const Header = () => {
     }
   }, [hash]);
 
-  useEffect(() => {
-    let currentSection: NavItem["href"] | null = null;
+  const updateActiveSection = useCallback((newHash: NavItem["href"]) => {
+    setActiveSection(newHash);
+    history.replaceState(null, "", newHash);
+  }, []);
 
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          const element = entry.target as HTMLElement;
-          const rect = element.getBoundingClientRect();
-          const viewportHeight = window.innerHeight;
-          const visibleHeight =
-            Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-          const visiblePercentage =
-            (visibleHeight / element.offsetHeight) * 100;
+        // Track all visible sections and their visibility percentages
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => {
+            const element = entry.target as HTMLElement;
+            const rect = element.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const visibleHeight =
+              Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+            const visiblePercentage =
+              (visibleHeight / element.offsetHeight) * 100;
 
-          const isSmallSection = element.offsetHeight < viewportHeight * 0.5;
-          const threshold = isSmallSection ? 30 : 50;
+            return {
+              id: element.id,
+              visiblePercentage,
+              top: rect.top,
+            };
+          });
 
-          if (entry.isIntersecting && visiblePercentage >= threshold) {
-            const newHash = `#${element.id}` as NavItem["href"];
+        if (visibleSections.length === 0) return;
 
-            if (currentSection !== newHash) {
-              currentSection = newHash;
-              setActiveSection(newHash);
-              history.replaceState(null, "", newHash);
-            }
+        // Sort sections by visibility percentage and proximity to top of viewport
+        const bestSection = visibleSections.reduce((prev, current) => {
+          if (current.visiblePercentage > prev.visiblePercentage)
+            return current;
+          if (current.visiblePercentage === prev.visiblePercentage) {
+            return Math.abs(current.top) < Math.abs(prev.top) ? current : prev;
           }
+          return prev;
         });
+
+        updateActiveSection(`#${bestSection.id}` as NavItem["href"]);
       },
       {
-        rootMargin: "0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: "-10% 0px -10% 0px", // Adjust the rootMargin to create a buffer zone
+        threshold: Array.from({ length: 101 }, (_, i) => i / 100), // Create more granular thresholds
       }
     );
 
@@ -71,7 +84,7 @@ export const Header = () => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [updateActiveSection]);
 
   const handleNavClick = (href: NavItem["href"]) => {
     setActiveSection(href);
@@ -102,7 +115,6 @@ export const Header = () => {
 
       {/* Mobile Navigation */}
       <div className="md:hidden">
-        {/* Hamburger Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className={twMerge(
@@ -117,7 +129,6 @@ export const Header = () => {
           )}
         </button>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="fixed inset-0 bg-black/85 backdrop-blur pt-16">
             <nav className="flex flex-col items-center gap-4 p-4">
