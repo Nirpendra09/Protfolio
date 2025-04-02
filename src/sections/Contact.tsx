@@ -5,11 +5,12 @@ import grainImage from "@/assets/images/grain.jpg";
 export const ContactSection = () => {
   const emailAddress = "nirpendra09@gmail.com";
 
-  const handleContact = () => {
-    window.location.href = `mailto:${emailAddress}`;
+  const handleContact = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    window.open(`mailto:${emailAddress}`, "_blank");
   };
   return (
-    <div id="contact" className="py-16 pt-12 lg:py-24 lg:pt-20">
+    <div id="contact" className="py-16 pt-12 lg:py-24 lg:pt-20 relative z-50">
       <div className="container">
         <div className="bg-gradient-to-r from-emerald-300 to-sky-400 text-gray-900 py-8 px-10 rounded-3xl text-center md:text-left relative overflow-hidden z-0">
           <div
